@@ -1,4 +1,7 @@
+console.log("App.js is running!");
+
 import { myCV } from './cv-data.js';
+
 
 function renderPersonalInfo() {
   document.getElementById('myName').textContent = myCV.personalInfo.name;
@@ -7,5 +10,4 @@ function renderPersonalInfo() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderPersonalInfo();
-  document.getElementById('current-year').textContent = new Date().getFullYear();
 });
