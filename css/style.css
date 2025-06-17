@@ -88,11 +88,27 @@ main,
 
 .item {
   display: flex;
+  width: 100%;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
   font-size: 1rem;
   margin-bottom: 0.75rem;
   color: var(--color-text);
+}
+
+.experience-description {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.experience-description > * {
+  flex: 1;
+  padding-left: 1rem;
 }
 
 .period {
