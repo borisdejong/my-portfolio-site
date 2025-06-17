@@ -14,9 +14,9 @@ export const myCV = {
       company: "Belsimpel",
       duration: "Jan 2025 - Now",
       description: [
-        "Now working as product manager.",
-        "Test",
-        "Test 2"
+        "Oh",
+        "Very",
+        "Good"
       ],
       keywords: ["Product", "Manage", "Donkeys", "Debugging", "Agile", "Front-end"]
     },
