@@ -13,25 +13,23 @@ export const myCV = {
       title: "Product Manager",
       company: "Belsimpel",
       duration: "Jan 2025 - Now",
-      description: [
-        "Oh",
-        "Very",
-        "Good"
-      ],
+      description: "Lorem ipsum dolor sit amet.",
       keywords: ["Product", "Manage", "Donkeys", "Debugging", "Agile", "Front-end"]
     },
     {
       title: "Product Owner",
       company: "Belsimpel",
       duration: "May 2023 - Jan 2025",
-      description: [
-        "Wow",
-        "So",
-        "Nice"
-      ],
+      description: "Lorem ipsum dolor sit amet.",
       keywords: ["JavaScript", "HTML", "CSS", "Debugging"]
     },
-    // Add more experience objects as needed
+    {
+      title: "Founder",
+      company: "WebNexus",
+      duration: "Sept 2016 - Sept 2023",
+      description: "Lorem ipsum dolor sit amet.",
+      keywords: ["JavaScript", "HTML", "CSS", "Debugging"]
+    }
   ],
   education: [
     {

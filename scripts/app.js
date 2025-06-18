@@ -26,23 +26,19 @@ function renderExperience(experienceArray) {
       const period = document.createElement("div");
       period.className = "period";
       period.textContent = `${item.duration}`;
+      role.textContent = `${item.title} @ ${item.company}`;
 
-      const description = document.createElement("ul");
+      const description = document.createElement("p");
       description.className = "description";
-
-      const descriptionItems = item.description.map(test => {
-        return `<li>${test}</li>`; 
-      }).join("");
+      description.textContent = item.description;
 
       const keywords = document.createElement("ul");
-      description.className = "description";
+      keywords.className = "description-list";
 
       const keywordItems = item.keywords.map(keywordItem => {
         return `<li>${keywordItem}</li>`; 
       }).join("");
 
-
-      description.innerHTML = descriptionItems;
       keywords.innerHTML = keywordItems;
 
       experienceHeader.appendChild(role);
@@ -75,7 +71,7 @@ function renderEducation(educationArray) {
     institution.textContent = `${item.institution} - ${item.year}`;
     
     const keywords = document.createElement("ul");
-    keywords.className = "keywords";
+    keywords.className = "description-list";
 
     const keywordItems = item.keywords.map(keyword => {
       return `<li>${keyword}</li>`;
@@ -97,11 +93,13 @@ function renderSkills(skillsArray) {
 
   skillsArray.forEach((skill) => {
     const skillItem = document.createElement("li");
-    skillItem.className = "skill-item";
+    skillItem.className = "description-item";
 
     const skillName = document.createElement("span");
     skillName.className = "skill-name";
     skillName.textContent = `${skill.name} (${skill.type})`;
+    skillName.dataset.skill = 'JavaScript';
+
 
     const skillLevel = document.createElement("span");
     skillLevel.className = `skill-level ${skill.level.toLowerCase()}`;
@@ -129,7 +127,7 @@ function renderProjects(projectsArray) {
     projectDescription.textContent = project.description;
 
     const technologies = document.createElement("ul");
-    technologies.className = "technologies";
+    technologies.className = "description-list";
 
     const technologyItems = project.technologies.map(tech => {
       return `<li>${tech}</li>`;
@@ -147,7 +145,7 @@ function renderProjects(projectsArray) {
 
     const githubLink = document.createElement("a");
     githubLink.href = project.githubLink;
-    githubLink.textContent = "GitHub";
+    githubLink.textContent = "View GitHub";
     githubLink.target = "_blank"; // Open in new tab
 
     projectLinks.appendChild(liveLink);
@@ -162,10 +160,43 @@ function renderProjects(projectsArray) {
   });
 }
 
+function highlightText(text, term) {
+    if (!term || typeof text !== 'string') return text;
+
+    const regex = new RegExp(`(${term})`, 'gi');
+
+    return text.replace(regex, '<span class="highlight">$&</span>'); // $& inserts the matched text itself
+}
+
+async function performSearch() {
+  searchTerm = searchInput.value.toLowerCase().trim();
+  document.getElementById('experienceList').innerHTML = '';
+  document.getElementById('educationList').innerHTML = '';
+  document.getElementById('skillsList').innerHTML = '';
+
+  if (searchTerm.length > 0) {
+    clearSearchButton.style.display = 'inline-block';
+  } else {
+    clearSearchButton.style.display = 'none';
+  }
+
+  let totalMatches = 0;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderPersonalInfo(myCV.personalInfo);
   renderExperience(myCV.experience);
   renderEducation(myCV.education);
   renderProjects(myCV.projects);
   renderSkills(myCV.skills);
+
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
+  const clearSearchButton = document.getElementById("clearSearchButton");
+  const noResultsMessage = document.getElementById("noResultsMessage");
+
+  searchButton.addEventListener("click", performSearch);
+  searchInput.addEventListener("input", performSearch);
+  clearSearchButton.addEventListener("click", performSearch);
+
 });
