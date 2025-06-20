@@ -10,7 +10,7 @@ function renderPersonalInfo(persInfo) {
 
 function renderExperience(experienceArray) {
     experienceArray.forEach((item) => {
-      const experienceItem = document.createElement("div");
+      const experienceItem = document.createElement("li");
       experienceItem.className = "item";
 
       const experienceHeader = document.createElement("div");
@@ -56,7 +56,7 @@ function renderEducation(educationArray) {
   const educationList = document.getElementById("educationList");
 
   educationArray.forEach((item) => {
-    const educationItem = document.createElement("div");
+    const educationItem = document.createElement("li");
     educationItem.className = "item";
 
     const educationHeader = document.createElement("div");
@@ -115,7 +115,7 @@ function renderProjects(projectsArray) {
   const projectList = document.getElementById("projectList");
 
   projectsArray.forEach((project) => {
-    const projectItem = document.createElement("div");
+    const projectItem = document.createElement("li");
     projectItem.className = "item";
 
     const projectName = document.createElement("h3");
@@ -169,7 +169,7 @@ function highlightText(text, term) {
 }
 
 async function performSearch() {
-  searchTerm = searchInput.value.toLowerCase().trim();
+  const searchTerm = searchInput.value.toLowerCase().trim();
   document.getElementById('experienceList').innerHTML = '';
   document.getElementById('educationList').innerHTML = '';
   document.getElementById('skillsList').innerHTML = '';
@@ -181,6 +181,37 @@ async function performSearch() {
   }
 
   let totalMatches = 0;
+
+  // Experience Section
+  const experienceContainer = document.getElementById('experienceList');
+  experienceContainer.innerHTML = '';
+
+  const filteredExperience = myCV.experience.filter(job => {
+      // Combine all relevant searchable text from the job object into one lowercase string
+      const searchableText = [
+          job.title,
+          job.company,
+          job.duration,
+          job.description, // Use spread to flatten description array
+          ...(job.keywords || [])     // Use spread for keywords, handle if missing
+      ].join(' ').toLowerCase(); // Join all parts with a space
+
+      return searchableText.includes(searchTerm);
+  });
+
+  if (filteredExperience.length > 0) {
+      totalMatches += filteredExperience.length;
+      // Call your rendering function for experience, passing filtered data and searchTerm for highlighting
+      renderExperience(filteredExperience, searchTerm);
+      document.getElementById('experience').style.display = 'block'; // Ensure section is visible
+  } else if (searchTerm) {
+      document.getElementById('experience').style.display = 'none'; // Hide if no matches and there's a search term
+  } else {
+      // If no search term, always render the full list
+      renderExperience(myCV.experience, '');
+      document.getElementById('experience').style.display = 'block';
+  }
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -197,6 +228,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   searchButton.addEventListener("click", performSearch);
   searchInput.addEventListener("input", performSearch);
-  clearSearchButton.addEventListener("click", performSearch);
+  
+  clearSearchButton.addEventListener("click", () => {
+      searchInput.value = '';
+      // Pass the necessary arguments to performSearch if it expects them
+      // As per our structured guide:
+      performSearch(searchInput.value, noResultsMessage, clearSearchButton, searchInput);
+      clearSearchButton.style.display = 'none'; // Also remember to hide the button
+  });
 
 });
