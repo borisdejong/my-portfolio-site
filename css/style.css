@@ -5,6 +5,12 @@
   --color-grey: #666666;
   --color-light-divider: #e2e2e2;
   --color-link: #0070f3;
+
+  --skill-level-beginner: #f3f9ff;
+  --skill-level-basic: #d9e9fe;
+  --skill-level-intermediate: #beddff;
+  --skill-level-advanced: #7cb9ff;
+  
   --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -147,6 +153,33 @@ main,
     font-weight: bold;
     padding: 2px 4px;
     border-radius: 3px;
+}
+
+#skillsList {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1;
+}
+
+#skillsList .description-item .skill-level {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#skillsList .description-item .skill-level.basic {
+  background-color: var(--skill-level-basic);
+}
+
+#skillsList .description-item .skill-level.beginner {
+  background-color: var(--skill-level-beginner);
+}
+
+#skillsList .description-item .skill-level.intermediate {
+  background-color: var(--skill-level-intermediate);
+}
+
+#skillsList .description-item .skill-level.advanced {
+  background-color: var(--skill-level-advanced);
 }
 
 /* Your specific search bar styles below */

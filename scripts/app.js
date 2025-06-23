@@ -94,12 +94,11 @@ function renderSkills(skillsArray) {
   skillsArray.forEach((skill) => {
     const skillItem = document.createElement("li");
     skillItem.className = "description-item";
+    skillItem.setAttribute('data-skill', skill.name);
 
     const skillName = document.createElement("span");
     skillName.className = "skill-name";
     skillName.textContent = `${skill.name} (${skill.type})`;
-    skillName.dataset.skill = 'JavaScript';
-
 
     const skillLevel = document.createElement("span");
     skillLevel.className = `skill-level ${skill.level.toLowerCase()}`;
@@ -174,6 +173,7 @@ async function performSearch() {
   document.getElementById('educationList').innerHTML = '';
   document.getElementById('skillsList').innerHTML = '';
 
+  // Display clearSearchButton only if something is entered in the search input field
   if (searchTerm.length > 0) {
     clearSearchButton.style.display = 'inline-block';
   } else {
@@ -181,10 +181,6 @@ async function performSearch() {
   }
 
   let totalMatches = 0;
-
-  // Experience Section
-  const experienceContainer = document.getElementById('experienceList');
-  experienceContainer.innerHTML = '';
 
   const filteredExperience = myCV.experience.filter(job => {
       // Combine all relevant searchable text from the job object into one lowercase string
@@ -199,6 +195,18 @@ async function performSearch() {
       return searchableText.includes(searchTerm);
   });
 
+  const filteredEducation = myCV.education.filter(educationItem => {
+      // Combine all relevant searchable text from the job object into one lowercase string
+      const searchableTextEducation = [
+          educationItem.degree,
+          educationItem.institution,
+          educationItem.year,
+          ...(educationItem.keywords || [])     // Use spread for keywords, handle if missing
+      ].join(' ').toLowerCase(); // Join all parts with a space
+
+      return searchableTextEducation.includes(searchTerm);
+  });
+
   if (filteredExperience.length > 0) {
       totalMatches += filteredExperience.length;
       // Call your rendering function for experience, passing filtered data and searchTerm for highlighting
@@ -210,6 +218,19 @@ async function performSearch() {
       // If no search term, always render the full list
       renderExperience(myCV.experience, '');
       document.getElementById('experience').style.display = 'block';
+  }
+
+  if (filteredEducation.length > 0) {
+      totalMatches += filteredEducation.length;
+      // Call your rendering function for experience, passing filtered data and searchTerm for highlighting
+      renderEducation(filteredEducation, searchTerm);
+      document.getElementById('study').style.display = 'block'; // Ensure section is visible
+  } else if (searchTerm) {
+      document.getElementById('study').style.display = 'none'; // Hide if no matches and there's a search term
+  } else {
+      // If no search term, always render the full list
+      renderEducation(myCV.education, '');
+      document.getElementById('study').style.display = 'block';
   }
 
 }
