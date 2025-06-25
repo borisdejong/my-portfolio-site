@@ -20,10 +20,10 @@
     <h1 id="myName" class="title"></h1>
     <p id="subTitle" class="subtitle"></p>
 
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search skills, companies, projects...">
-        <button id="searchButton">Search</button>
-        <button id="clearSearchButton" style="display: none;">Clear Search</button>
+    <div class="search-outer-container"> <div class="search-input-wrapper"> 
+      <input type="text" id="searchInput" placeholder="Search skills, companies, projects...">
+      <button type="button" class="clear-input-button" id="clearSearchButton">&times;</button> </div>
+      <button id="searchButton">Search</button>
     </div>
     <div id="noResultsMessage" style="display: none; color: gray; margin-top: 15px;">No matches found.</div>
 

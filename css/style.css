@@ -184,25 +184,31 @@ main,
 
 /* Your specific search bar styles below */
 
-.search-container {
-    display: flex;
-    gap: 10px; /* Space between elements */
-    align-items: center; /* This is key for vertical alignment within flex container */
-    max-width: 600px; /* Limit max width for better aesthetics on large screens */
-    width: 100%; /* Make it fill container up to max-width */
-    /* box-sizing: border-box; -- No longer explicitly needed here if global rule is used */
+.search-outer-container {
+    display: flex; /* Keep this to arrange input group and search button */
+    gap: 10px;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-input-wrapper {
+    position: relative; /* Make this the positioning context for the clear button */
+    flex-grow: 1;      /* Allows it to take available space in the flex container */
 }
 
 #searchInput {
-    flex-grow: 1; /* Allows input to take up available space */
-    padding: 12px 15px; /* Vertical (12px) and horizontal (15px) padding */
-    border: 2px solid #e0e0e0; /* Light grey border */
-    border-radius: 8px; /* Rounded corners for input */
+    flex-grow: 1; /* Allows input to take up available space within its wrapper */
+    padding: 12px 40px 12px 15px; /* IMPORTANT: Increased right padding for the clear button */
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
     font-size: 16px;
-    color: #333; /* Darker text color */
-    outline: none; /* Remove default focus outline */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
-    /* box-sizing: border-box; -- No longer explicitly needed here if global rule is used */
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* Ensure input fills the wrapper */
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
 #searchInput::placeholder {
@@ -226,6 +232,11 @@ main,
     white-space: nowrap;
 }
 
+.clear-input-button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Light background on hover */
+    color: #555; /* Darker color on hover */
+}
+
 #searchButton {
     background-color: #007bff; /* Primary blue color */
     color: #fff; /* White text */
@@ -241,20 +252,41 @@ main,
     transform: translateY(0); /* Reset lift on click */
 }
 
-#clearSearchButton {
-    background-color: #f44336; /* Red color for clear button */
-    color: #fff;
+.clear-input-button {
+    position: absolute; /* Position relative to .search-input-wrapper */
+    right: 10px; /* Distance from the right edge of the input */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for perfect vertical centering */
+    background: none; /* No background color */
+    border: none; /* No border */
+    font-size: 20px; /* Size of the 'x' */
+    color: #999; /* Color for the 'x' */
+    cursor: pointer; /* Indicates it's clickable */
+    display: none; /* Hidden by default */
+    padding: 5px; /* Make the clickable area larger */
+    line-height: 1; /* Helps with vertical alignment of the 'x' character */
+    z-index: 2; /* Ensure button is above the input text */
+    border-radius: 50%; /* Make it perfectly round */
+    transition: background-color 0.2s ease; /* Smooth transition for hover effect */
+    width: 30px;
 }
 
-#clearSearchButton:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-    transform: translateY(-1px);
+.clear-input-button:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Light background on hover */
+    color: #555; /* Darker color on hover */
 }
 
-#clearSearchButton:active {
-    background-color: #b71c1c;
-    transform: translateY(0);
+.search-outer-container button:not(.clear-input-button) { /* Apply to buttons that are not the clear button */
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    white-space: nowrap;
 }
+/* ... existing #searchButton styles below ... */
 
 #noResultsMessage {
     font-size: 16px;
