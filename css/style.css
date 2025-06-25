@@ -182,10 +182,10 @@ main,
   background-color: var(--skill-level-advanced);
 }
 
-/* Your specific search bar styles below */
+/* search bar styles */
 
 .search-outer-container {
-    display: flex; /* Keep this to arrange input group and search button */
+    display: flex;
     gap: 10px;
     align-items: center;
     max-width: 600px;
