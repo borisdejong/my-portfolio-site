@@ -11,24 +11,24 @@ export const myCV = {
   experience: [
     {
       title: "Product Manager",
-      company: "Belsimpel",
+      company: "Belsimpel - Gomibo",
       duration: "Jan 2025 - Now",
-      description: "Lorem ipsum dolor sit amet.",
-      keywords: ["Product", "Manage", "Donkeys", "Debugging", "Agile", "Front-end"]
+      description: "Part of the the Channel Apps engineering team as well as the Channel Apps product team. Responsible for the front-end of the Belsimpel and Gomibo websites.",
+      keywords: ["Front-end", "Team Channel Apps", "Gitlab", "Remix/React Router"]
     },
     {
       title: "Product Owner",
-      company: "Belsimpel",
+      company: "Belsimpel - Gomibo",
       duration: "May 2023 - Jan 2025",
-      description: "Lorem ipsum dolor sit amet.",
-      keywords: ["JavaScript", "HTML", "CSS", "Debugging"]
+      description: "Product Owner within the Channel Apps engineering team.",
+      keywords: ["Front-end", "Team Channel Apps", "Gitlab", "Remix/React Router"]
     },
     {
       title: "Founder",
       company: "WebNexus",
       duration: "Sept 2016 - Sept 2023",
-      description: "Lorem ipsum dolor sit amet.",
-      keywords: ["JavaScript", "HTML", "CSS", "Debugging"]
+      description: "Founder of WebNexus.",
+      keywords: ["WordPress", "HTML", "CSS", "Product Design"]
     }
   ],
   education: [
