@@ -3,13 +3,14 @@
   --color-text: #222222;
   --color-background: #fefefe;
   --color-grey: #666666;
+  --color-grey-light: #f9f9f9;
   --color-light-divider: #e2e2e2;
   --color-link: #0070f3;
 
   --skill-level-beginner: #f3f9ff;
-  --skill-level-basic: #d9e9fe;
-  --skill-level-intermediate: #beddff;
-  --skill-level-advanced: #7cb9ff;
+  --skill-level-basic: #f7fed9;
+  --skill-level-intermediate: #ffbef1;
+  --skill-level-advanced: #d5ff7c;
   
   --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -96,14 +97,10 @@ main,
 .item {
   display: flex;
   width: 100%;
-  gap: 1rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   font-size: 1rem;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-light-divider);
   color: var(--color-text);
 }
 
@@ -186,6 +183,38 @@ main,
   cursor: pointer;
   padding: 5px 0;
   border-bottom: 1px solid var(--color-light-divider);
+}
+
+/* collapsible */
+.collapsible-item {
+  padding: 1rem;
+  margin-left: -1rem;
+}
+
+.collapsible-item.visible > .collapsible-content {
+  max-height: 500px;
+}
+
+.collapsible-item > .collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.collapsible-item > .collapsible-content > .description {
+  padding-top: 1rem;
+}
+
+.collapsible-item {
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all .2s ease-in-out;
+}
+
+.collapsible-item:hover,
+.collapsible-item:focus,
+.collapsible-item:active {
+  background-color: var(--color-grey-light);
 }
 
 /* search bar styles */

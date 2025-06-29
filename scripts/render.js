@@ -1,7 +1,7 @@
-import { highlightText } from './search.js';
+import { highlightText } from "./search.js";
 
 export function renderPersonalInfo(persInfo) {
-  document.getElementById('myName').textContent = persInfo.name;
+  document.getElementById("myName").textContent = persInfo.name;
   document.getElementById("subTitle").textContent = persInfo.title;
 }
 
@@ -9,12 +9,15 @@ export function renderExperience(experienceArray, highlightTerm) {
     experienceArray.forEach((item) => {
       const experienceItem = document.createElement("li");
       experienceItem.className = "item";
+      experienceItem.classList.add("collapsible-item");
 
       const experienceHeader = document.createElement("div");
       experienceHeader.className = "experience-header";
+      experienceHeader.classList.add("collapsible-header");
 
       const experienceDescription = document.createElement("div");
       experienceDescription.className = "experience-description";
+      experienceDescription.classList.add("collapsible-content");
 
       const role = document.createElement("h3");
       role.className = "role";
@@ -54,9 +57,11 @@ export function renderEducation(educationArray, highlightTerm) {
   educationArray.forEach((item) => {
     const educationItem = document.createElement("li");
     educationItem.className = "item";
+    educationItem.classList.add("collapsible-item");
 
     const educationHeader = document.createElement("div");
     educationHeader.className = "education-header";
+    educationHeader.classList.add("collapsible-header");
 
     const degree = document.createElement("h3");
     degree.className = "degree";
@@ -68,6 +73,7 @@ export function renderEducation(educationArray, highlightTerm) {
     
     const keywords = document.createElement("ul");
     keywords.className = "description-list";
+    keywords.classList.add("collapsible-content");
 
     const keywordItems = item.keywords.map(keyword => {
       return `<li>${highlightText(keyword, highlightTerm)}</li>`;
@@ -90,8 +96,8 @@ export function renderSkills(skillsArray, highlightTerm) {
   skillsArray.forEach((skill) => {
     const skillItem = document.createElement("li");
     skillItem.className = "description-item";
-    skillItem.classList.add('skill-tag');
-    skillItem.setAttribute('data-skill', skill.name);
+    skillItem.classList.add("skill-tag");
+    skillItem.setAttribute("data-skill", skill.name);
 
     const skillName = document.createElement("span");
     skillName.className = "skill-name";

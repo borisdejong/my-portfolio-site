@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   searchButton.addEventListener("click", performSearch);
   searchInput.addEventListener("input", performSearch);
 
+  // Event listener for skills list
   const skillsList = document.getElementById("skillsList");
   skillsList.addEventListener("click", (event) => {
     const clickedSkillTag = event.target.closest('.skill-tag');
@@ -24,6 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const skillName = clickedSkillTag.dataset.skill;
         searchInput.value = skillName;
         performSearch(skillName, noResultsMessage, clearSearchButton, searchInput);
+    }
+  });
+
+  const experienceList = document.getElementById("experienceList");
+  experienceList.addEventListener("click", (event) => {
+    const clickedItem = event.target.closest('.collapsible-item');
+    if (clickedItem) {
+        clickedItem.classList.toggle("visible");
     }
   });
   
